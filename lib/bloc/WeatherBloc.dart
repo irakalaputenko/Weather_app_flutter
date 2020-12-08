@@ -28,10 +28,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       final List<Weather> hourlyWeather =
       await WeatherService.fetchHourlyWeather(
           query: event.city, lon: event.lon, lat: event.lat);
-      final List<Weather> daylyWeather =
-      await WeatherService.fetchDaylyWeather(
-          query: event.city, lon: event.lon, lat: event.lat);
-      yield WeatherLoadSuccess(weather: weather, hourlyWeather: hourlyWeather,daylyWeather: daylyWeather);
+      yield WeatherLoadSuccess(weather: weather, hourlyWeather: hourlyWeather);
     } catch (_) {
       yield WeatherLoadFailure();
     }

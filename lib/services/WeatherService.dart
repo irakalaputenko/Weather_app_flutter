@@ -34,20 +34,4 @@ class WeatherService {
     }
   }
 
-  static Future<List<Weather>> fetchDaylyWeather({String query, String lat = "", String lon =""}) async {
-    var url =
-        'http://api.openweathermap.org/data/2.5/forecast/daily?q=$query&lat=$lat&lon=$lon&appid=$_apiKey&cnt=16&units=metric';
-    final response = await http.post(url);
-
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      final List<Weather> data = (jsonData['list'] as List<dynamic>)
-          .map((item) {
-        return Weather.fromJson(item);
-      }).toList();
-      return data;
-    } else {
-      throw Exception('Failed to load weather');
-    }
-  }
 }
